@@ -1,6 +1,8 @@
 package tests;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
+import io.qameta.allure.Step;
+import lombok.extern.log4j.Log4j2;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -9,7 +11,7 @@ import org.testng.annotations.BeforeMethod;
 import pages.*;
 
 import java.util.concurrent.TimeUnit;
-
+@Log4j2
 public class BaseTest {
     WebDriver driver;
     SignupPage signupPage;
@@ -19,7 +21,7 @@ public class BaseTest {
     ProjectModalPage projectModalPage;
     RepositoryPage repositoryPage;
     SuiteModalPage suiteModalPage;
-
+@Step("Setting up and opening the browser")
     @BeforeMethod
     public void setUp() {
         WebDriverManager.chromedriver().setup();
@@ -37,7 +39,7 @@ public class BaseTest {
         repositoryPage = new RepositoryPage(driver);
         suiteModalPage = new SuiteModalPage(driver);
     }
-
+@Step("Closing the browser")
     @AfterMethod(alwaysRun = true)
     public void tearDown(){
         driver.quit();
