@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Regression Test" parallel="tests" thread-count="2">
+    <test name="запуск в chrome">
+        <parameter name="browser" value="chrome"/>
+        <classes>
+            <class name="  "/>
+        </classes>
+    </test> <!-- Test -->
+
+
+    <test name="запуск в edge">
+        <parameter name="browser" value="edge"/>
+        <classes>
+            <class name="  "/>
+        </classes>
+    </test> <!-- Test -->
+
+</suite>
