@@ -26,9 +26,9 @@ public class LoginPage extends BasePage {
     @Step("Input the email: '{email}' and the password: '{password}'")
     public LoginPage inputEmailAndPassword(String email, String password) {
         driver.findElement(EMAIL).sendKeys(email);
-        log.info("Input in the email field: " + EMAIL + ": " + email);
+        log.info("Input in the email field");
         driver.findElement(PASSWORD).sendKeys(password);
-        log.info("Input in the password field: " + PASSWORD + ": " + password);
+        log.info("Input in the password field");
         return this;
     }
 
@@ -50,10 +50,9 @@ public class LoginPage extends BasePage {
         return new ProjectsPage(driver);
     }
 
-    @Step("Made sure that I went to the login page")
+    @Step("Login page loaded")
     @Override
     public boolean isPageOpen() {
-        log.info("Find xpath: "+SIGN_IN_BUTTON);
         return isExist(SIGN_IN_BUTTON);
     }
 }

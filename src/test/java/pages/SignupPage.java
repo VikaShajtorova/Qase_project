@@ -27,9 +27,9 @@ public class SignupPage extends BasePage {
     @Step("Input email: '{email}' password: '{password}' and password confirmation: '{passwordConfirmation}'")
     public SignupPage inputEmailPasswordPasswordConfirmationInRegistrationForm(String email, String password, String passwordConfirmation) {
         driver.findElement(E_MAIL).sendKeys(email);
-        log.info("Input in the email field: " + E_MAIL);
+        log.info("Input in the email field");
         driver.findElement(PASSWORD).sendKeys(password);
-        log.info("Input in the password field: " + PASSWORD);
+        log.info("Input in the password field");
         driver.findElement(PASSWORD_CONFIRMATION).sendKeys(passwordConfirmation);
         log.info("Input in the password confirmation field: " + PASSWORD_CONFIRMATION);
         return this;
@@ -42,10 +42,9 @@ public class SignupPage extends BasePage {
         return new SuccessfulRegistrationPage(driver);
     }
 
-    @Step("Made sure that I went to the signup page")
+    @Step("Signup page loaded")
     @Override
     public boolean isPageOpen() {
-        log.info("Find xpath: "+SIGN_UP_BUTTON);
         return isExist(SIGN_UP_BUTTON);
     }
 }

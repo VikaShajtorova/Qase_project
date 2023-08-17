@@ -18,6 +18,6 @@ public class RadioButton {
     @Step("Click on RadioButton")
     public void clickOnRadioButton(){
         driver.findElement(By.xpath(String.format(radioButtonLocator,this.label))).click();
-        log.info("Find xpath by label and click: "+radioButtonLocator+" "+this.label);
+        log.info("Find the RadioButton by label: " + label + " and clicks");
     }
 }

@@ -3,14 +3,23 @@ package tests;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import io.qameta.allure.Step;
 import lombok.extern.log4j.Log4j2;
+import org.apache.commons.io.FileUtils;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import pages.*;
 
+import java.io.File;
+import java.io.IOException;
+import java.util.HashMap;
 import java.util.concurrent.TimeUnit;
+
+import static org.testng.Assert.*;
+
 @Log4j2
 public class BaseTest {
     WebDriver driver;
@@ -21,7 +30,10 @@ public class BaseTest {
     ProjectModalPage projectModalPage;
     RepositoryPage repositoryPage;
     SuiteModalPage suiteModalPage;
-@Step("Setting up and opening the browser")
+    CasePage casePage;
+    AttachmentsCasePage attachmentsCasePage;
+
+    @Step("Setting up and opening the browser")
     @BeforeMethod
     public void setUp() {
         WebDriverManager.chromedriver().setup();
@@ -34,14 +46,18 @@ public class BaseTest {
         signupPage = new SignupPage(driver);
         successfulRegistrationPage = new SuccessfulRegistrationPage(driver);
         loginPage = new LoginPage(driver);
-        projectsPage =new ProjectsPage(driver);
+        projectsPage = new ProjectsPage(driver);
         projectModalPage = new ProjectModalPage(driver);
         repositoryPage = new RepositoryPage(driver);
         suiteModalPage = new SuiteModalPage(driver);
+        casePage = new CasePage(driver);
+        attachmentsCasePage = new AttachmentsCasePage(driver);
     }
-@Step("Closing the browser")
+
+
+    @Step("Closing the browser")
     @AfterMethod(alwaysRun = true)
-    public void tearDown(){
+    public void tearDown() {
         driver.quit();
     }
 

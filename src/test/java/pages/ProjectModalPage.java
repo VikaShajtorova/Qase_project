@@ -41,10 +41,9 @@ public class ProjectModalPage extends BasePage {
 
     }
 
-    @Step("Made sure that I went to the ProjectModalPage")
+    @Step("ProjectModal page loaded")
     @Override
     public boolean isPageOpen() {
-        log.info("Find xpath: "+CREATE_NEW_PROJECT_TITLE);
         return isExist(CREATE_NEW_PROJECT_TITLE);
     }
 }

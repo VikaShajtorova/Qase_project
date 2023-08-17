@@ -9,7 +9,7 @@ import org.openqa.selenium.WebDriver;
 public class TextArea {
     WebDriver driver;
     String label;
-    String textAreaLocator = "//label[text()='%s']/ancestor::div//textarea";
+    String textAreaLocator = "//label[text()='%s']/ancestor::div[contains(@class,'form-group')]//p";
 
     public TextArea(WebDriver driver, String label) {
         this.driver = driver;
@@ -19,8 +19,8 @@ public class TextArea {
     @Step("Clear and write the text in TextArea")
     public void write(String text) {
         driver.findElement(By.xpath(String.format(textAreaLocator, this.label))).clear();
-        log.info("Find the input field by label and clear: " + textAreaLocator + " " + this.label);
+        log.info("Find the TextArea field by label: " + label + " and clear: ");
         driver.findElement(By.xpath(String.format(textAreaLocator, this.label))).sendKeys(text);
-        log.info("Find the input field by label and write text: " + textAreaLocator + " " + this.label);
+        log.info("Find the TextArea field by label: " + label + " and write text: " + text);
     }
 }

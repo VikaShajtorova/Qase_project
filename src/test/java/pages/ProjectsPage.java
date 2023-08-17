@@ -36,10 +36,9 @@ public class ProjectsPage extends BasePage {
 
     }
 
-    @Step("Made sure that I went to the ProjectPage")
+    @Step("Project page loaded")
     @Override
     public boolean isPageOpen() {
-        log.info("Find xpath: " + PROJECTS_TITLE);
         return isExist(PROJECTS_TITLE);
     }
 }
