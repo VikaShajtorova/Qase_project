@@ -11,6 +11,7 @@ import org.testng.annotations.BeforeMethod;
 import pages.*;
 
 import java.util.concurrent.TimeUnit;
+
 @Log4j2
 public class BaseTest {
     WebDriver driver;
@@ -21,7 +22,9 @@ public class BaseTest {
     ProjectModalPage projectModalPage;
     RepositoryPage repositoryPage;
     SuiteModalPage suiteModalPage;
-@Step("Setting up and opening the browser")
+    CasePage casePage;
+
+    @Step("Setting up and opening the browser")
     @BeforeMethod
     public void setUp() {
         WebDriverManager.chromedriver().setup();
@@ -34,14 +37,16 @@ public class BaseTest {
         signupPage = new SignupPage(driver);
         successfulRegistrationPage = new SuccessfulRegistrationPage(driver);
         loginPage = new LoginPage(driver);
-        projectsPage =new ProjectsPage(driver);
+        projectsPage = new ProjectsPage(driver);
         projectModalPage = new ProjectModalPage(driver);
         repositoryPage = new RepositoryPage(driver);
         suiteModalPage = new SuiteModalPage(driver);
+        casePage = new CasePage(driver);
     }
-@Step("Closing the browser")
+
+    @Step("Closing the browser")
     @AfterMethod(alwaysRun = true)
-    public void tearDown(){
+    public void tearDown() {
         driver.quit();
     }
 

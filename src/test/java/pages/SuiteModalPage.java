@@ -6,6 +6,8 @@ import elements.TextEditor;
 import lombok.extern.log4j.Log4j2;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+
 @Log4j2
 public class SuiteModalPage extends BasePage{
     public static final By CREATE_NEW_SUITE_TITLE = By.xpath("//h3[@class='r_U3IU']");

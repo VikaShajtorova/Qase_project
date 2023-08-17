@@ -1,5 +1,6 @@
 package tests;
 
+import static org.testng.Assert.*;
 import org.testng.annotations.Test;
 
 public class RepositoryTest extends BaseTest{
@@ -13,6 +14,16 @@ public class RepositoryTest extends BaseTest{
                 .clickCreateButton();
 
 
+        assertEquals(repositoryPage.getTextOfMessageAboutCreationOfSuite(),"Suite was successfully created.",
+                "The message is missing or does not match");
+    }
+    @Test
+    public void userCreateCase(){
+        loginPage.userRegistersWithValidData();
+        projectsPage.getLatestProjectInListAndClick();
+        repositoryPage.clickCaseButton();
+        casePage.createCase();
+        casePage.clickSaveButton();
     }
 
 }
