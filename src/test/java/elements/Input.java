@@ -21,18 +21,15 @@ public class Input {
     @Step("Clear and write the text in Input")
     public void write(String text) {
         driver.findElement(By.xpath(String.format(inputLocator, this.label))).clear();
-        log.info("Find the input field by label: " + label + " and clear: ");
+        log.info("Find the input field by label: "+label+" and clear: ");
         driver.findElement(By.xpath(String.format(inputLocator, this.label))).sendKeys(text);
-        log.info("Find the input field by label: " + label + " and write text: " + text);
+        log.info("Find the input field by label: "+label+" and write text: " +text);
 
     }
 
-    @Step("Clear and write the text in Input")
-    public void writeTestCaseSteps(String text) {
-        driver.findElement(By.xpath(String.format(inputTestCaseSteps, this.label))).clear();
-        log.info("Find the input field by label: " + label + " and clear: ");
-        driver.findElement(By.xpath(String.format(inputTestCaseSteps, this.label))).sendKeys(text);
-        log.info("Find the input field by label: " + label + " and write text: " + text);
+    public void writeTestCaseSteps(String text){
+        driver.findElement(By.xpath(String.format(inputTestCaseSteps,this.label))).clear();
+        driver.findElement(By.xpath(String.format(inputTestCaseSteps,this.label))).sendKeys(text);
     }
 
 }
