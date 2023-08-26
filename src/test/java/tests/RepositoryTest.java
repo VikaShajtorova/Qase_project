@@ -26,16 +26,4 @@ public class RepositoryTest extends BaseTest{
         casePage.clickSaveButton();
     }
 
-    @Test
-    public void checkFileDownload() {
-        loginPage.userRegistersWithValidData();
-        projectsPage.getLatestProjectInListAndClick();
-        repositoryPage.clickCaseButton();
-        attachmentsCasePage.clickAddAttachmentButton();
-        attachmentsCasePage.downloadFile();
-
-
-
-    }
-
 }

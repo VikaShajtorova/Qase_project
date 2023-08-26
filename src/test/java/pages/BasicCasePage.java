@@ -2,27 +2,24 @@ package pages;
 
 import elements.DropDown;
 import elements.Input;
+import elements.TextArea;
 import elements.TextEditor;
-import io.qameta.allure.Step;
-import lombok.extern.log4j.Log4j2;
-import models.Case;
 import org.openqa.selenium.WebDriver;
-@Log4j2
+
 public class BasicCasePage extends CasePage{
-    @Step("Fill in the Basic fields by label")
-    public BasicCasePage fillInBasicFields(Case caseBasic){
-        new Input(driver,"Title").write(caseBasic.getTitle());
-        new DropDown(driver,"Status").selectOption(caseBasic.getStatus());
-        new TextEditor(driver,"Description").write(caseBasic.getDescription());
-        new DropDown(driver,"Suite").selectOption(caseBasic.getSuite());
-        new DropDown(driver,"Type").selectOption(caseBasic.getType());
-        new DropDown(driver,"Milestone").selectOptionMilestone(caseBasic.getMilestone());
-        new DropDown(driver,"Severity").selectOption(caseBasic.getSeverity());
-        new DropDown(driver,"Layer").selectOption(caseBasic.getLayer());
-        new DropDown(driver,"Behavior").selectOption(caseBasic.getBehavior());
-        new DropDown(driver,"Priority").selectOption(caseBasic.getPriority());
-        new DropDown(driver,"Is flaky").selectOption(caseBasic.getIs_Flaky());
-        new DropDown(driver,"Automation status").selectOption(caseBasic.getAutomationStatus());
+    public BasicCasePage fillInBasicFields(){
+        new Input(driver,"Title").write("Enter valid data in the password field");
+        new DropDown(driver,"Status").selectOption("Draft");
+        new TextEditor(driver,"Description").write("The user is on the registration page");
+        new DropDown(driver,"Suite").selectOption("Test cases without suite");
+        new DropDown(driver,"Type").selectOption("Smoke");
+        new DropDown(driver,"Milestone").selectOption("Not set");
+        new DropDown(driver,"Severity").selectOption("Normal");
+        new DropDown(driver,"Layer").selectOption("Not set");
+        new DropDown(driver,"Behavior").selectOption("Positive");
+        new DropDown(driver,"Priority").selectOption("High");
+        new DropDown(driver,"Is flaky").selectOption("No");
+        new DropDown(driver,"Automation status").selectOption("Not automated");
         return this;
     }
 

@@ -44,7 +44,7 @@ public class RepositoryPage extends BasePage {
         return driver.findElement(CREATE_SUITE_MESSAGE).getText();
     }
 
-    @Step("Repository page loaded")
+    @Step("Made sure that I went to the repository page")
     @Override
     public boolean isPageOpen() {
         return isExist(REPOSITORY_TITLE);
