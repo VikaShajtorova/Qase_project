@@ -24,7 +24,6 @@ public class SuccessfulRegistrationPage extends BasePage {
     @Step("Made sure that I went to the successful registration page")
     @Override
     public boolean isPageOpen() {
-        log.info("Find xpath: "+REGISTRATION_MASSAGE);
         return isExist(REGISTRATION_MASSAGE);
     }
 }
