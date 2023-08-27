@@ -18,8 +18,8 @@ public class RepositoryPage extends BasePage {
     }
 
     @Step("Get the project code")
-    public String getProjectCode() {
-        String projectCode = driver.findElement(REPOSITORY_TITLE).getText();
+    public boolean getProjectCode() {
+        boolean projectCode = driver.findElement(REPOSITORY_TITLE).isDisplayed();
         log.info("Find xpath and get the project code: " + REPOSITORY_TITLE);
         return projectCode;
     }

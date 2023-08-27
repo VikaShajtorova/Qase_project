@@ -9,6 +9,7 @@ import org.openqa.selenium.WebDriver;
 public class ProjectsPage extends BasePage {
     public static final By PROJECTS_TITLE = By.xpath("//div[@class='col-lg-12']//h1[text()='Projects']");
     public static final By CREATE_NEW_PROJECT_BUTTON = By.id("createButton");
+    public static final By LATEST_PROJECT = By.xpath("//tr[@class='project-row'][last()]//a[@class='project-name']");
 
     public ProjectsPage(WebDriver driver) {
         super(driver);
@@ -30,7 +31,7 @@ public class ProjectsPage extends BasePage {
 
     @Step("Find the last project in the list and click")
     public RepositoryPage getLatestProjectInListAndClick() {
-        driver.findElement(By.xpath("//tr[@class='project-row'][last()]//a[@class='project-name']")).click();
+        driver.findElement(LATEST_PROJECT).click();
         log.info("Find xpath and click: " + "//tr[@class='project-row'][last()]//a[@class='project-name']");
         return new RepositoryPage(driver);
 

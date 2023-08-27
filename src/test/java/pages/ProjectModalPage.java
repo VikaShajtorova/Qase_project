@@ -5,6 +5,7 @@ import elements.RadioButton;
 import elements.TextArea;
 import io.qameta.allure.Step;
 import lombok.extern.log4j.Log4j2;
+import models.Project;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
@@ -31,14 +32,13 @@ public class ProjectModalPage extends BasePage {
     }
 
     @Step("Create a new project")
-    public RepositoryPage createProject() {
-        new Input(driver, "Project name").write("Salesforce");
-        new Input(driver, "Project code").write("SF");
-        new TextArea(driver, "Description").write("The user goes to the site by following the link");
+    public RepositoryPage createProject(Project project) {
+        new Input(driver, "Project name").write(project.getProjectName());
+        new Input(driver, "Project code").write(project.getProjectCode());
+        new TextArea(driver, "Description").write(project.getDescription());
         new RadioButton(driver, "Private").clickOnRadioButton();
         new RadioButton(driver, "Add all members to this project").clickOnRadioButton();
         return clickCreateProjectButton();
-
     }
 
     @Step("ProjectModal page loaded")

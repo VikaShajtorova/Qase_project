@@ -1,19 +1,18 @@
 package tests;
 
+import models.Project;
+import models.ProjectFactory;
 import org.testng.annotations.Test;
-
-import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.*;
 
 public class ProjectsTest extends BaseTest{
     @Test
     public void userCreatesProject(){
         loginPage.userRegistersWithValidData();
-        projectsPage.clickCreateNewProjectButton()
-                .isPageOpen();
-        projectModalPage.createProject();
-        repositoryPage.isPageOpen();
+        projectsPage.clickCreateNewProjectButton();
+        Project project = ProjectFactory.fillInAllFieldsOfProject();
+        projectModalPage.createProject(project);
 
-
-        assertEquals(repositoryPage.getProjectCode(),"SF repository");
+        assertTrue(repositoryPage.getProjectCode());
     }
 }

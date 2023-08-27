@@ -10,7 +10,7 @@ public class LoginPage extends BasePage {
     public static final By EMAIL = By.xpath("//input[@name='email']");
     public static final By PASSWORD = By.xpath("//input[@name='password']");
     public static final By SIGN_IN_BUTTON = By.xpath("//button[@type='submit']");
-
+    public static final By ERROR_MESSAGE = By.xpath("//div[@class='nlvny_']//span[@class='VF_8Uu']");
 
     public LoginPage(WebDriver driver) {
         super(driver);
@@ -23,12 +23,12 @@ public class LoginPage extends BasePage {
         return this;
     }
 
-    @Step("Input the email: '{email}' and the password: '{password}'")
+    @Step("Input the email and the password")
     public LoginPage inputEmailAndPassword(String email, String password) {
         driver.findElement(EMAIL).sendKeys(email);
-        log.info("Input in the email field");
+        log.info("Input in the email field email");
         driver.findElement(PASSWORD).sendKeys(password);
-        log.info("Input in the password field");
+        log.info("Input in the password field password");
         return this;
     }
 
@@ -37,6 +37,14 @@ public class LoginPage extends BasePage {
         driver.findElement(SIGN_IN_BUTTON).click();
         log.info("Find xpath and click: " + SIGN_IN_BUTTON);
         return new ProjectsPage(driver);
+    }
+
+    public String getErrorMessage() {
+        return driver.findElement(ERROR_MESSAGE).getText();
+    }
+
+    public String getMessage(String placeholder) {
+        return driver.findElement(By.xpath(String.format(message, placeholder))).getText();
     }
 
     @Step("User registers with valid data")
