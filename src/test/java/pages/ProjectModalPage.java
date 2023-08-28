@@ -41,6 +41,19 @@ public class ProjectModalPage extends BasePage {
         return clickCreateProjectButton();
     }
 
+    @Step("Fill in the required fields of the project")
+    public RepositoryPage fillInRequiredFieldsOfProject(Project project) {
+        new Input(driver, "Project name").write(project.getProjectName());
+        new Input(driver, "Project code").write(project.getProjectCode());
+        return clickCreateProjectButton();
+    }
+
+    @Step("Fill in only the project name field")
+    public RepositoryPage fillInOnlyProjectNameField(Project project) {
+        new Input(driver, "Project name").write(project.getProjectName());
+        return clickCreateProjectButton();
+    }
+
     @Step("ProjectModal page loaded")
     @Override
     public boolean isPageOpen() {
