@@ -34,6 +34,8 @@ public class RepositoryTest extends BaseTest{
         attachmentsCasePage.clickAddAttachmentButton();
         attachmentsCasePage.downloadFile();
 
+        assertEquals(attachmentsCasePage.getFileName(),"Screenshot_8.png","имя файла не совпадает");
+
 
 
     }

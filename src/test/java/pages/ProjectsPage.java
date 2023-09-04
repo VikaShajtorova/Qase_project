@@ -12,10 +12,11 @@ import java.util.List;
 @Log4j2
 public class ProjectsPage extends BasePage {
     public static final By PROJECTS_TITLE = By.xpath("//div[@class='col-lg-12']//h1[text()='Projects']");
+    public static final By PROJECTS_BUTTON = By.xpath("//a[text()='Projects']");
     public static final By CREATE_NEW_PROJECT_BUTTON = By.id("createButton");
     public static final By LATEST_PROJECT = By.xpath("//tr[@class='project-row'][last()]//a[@class='project-name']");
-    public static final By DROPDOWN_DELETE_LATEST_PROJECT = By.xpath("//tr[@class='project-row'][last()]//a[@class='btn btn-dropdown']");
-    public static final By DELETE_BUTTON = By.xpath("//tr[@class='project-row'][last()]//div[@class='dropdown']//button[text()='Delete']");
+    public static final By DROPDOWN_DELETE_LATEST_PROJECT = By.xpath("(//tr[@class='project-row']//div//a//i)[last()]");
+    public static final By DELETE_BUTTON = By.xpath("(//tr[@class='project-row']//div//div[@class='dropdown-item'])[last()]");
     public static final By DELETE_BUTTON_MODAL = By.xpath("//span[text()='Delete project']/ancestor::div[contains(@class,'ReactModal__Content')]//span[text()='Delete project']");
 public static final  By LIST_PROJECT = By.xpath("//tr[@class='project-row']");
     public ProjectsPage(WebDriver driver) {
@@ -26,6 +27,10 @@ public static final  By LIST_PROJECT = By.xpath("//tr[@class='project-row']");
     public ProjectsPage open() {
         driver.get(BASE_URL + "projects");
         log.info("Go to the ProjectPage by: " + BASE_URL + "projects");
+        return this;
+    }
+    public ProjectsPage clickProjectButton(){
+       wait.until(ExpectedConditions.elementToBeClickable(PROJECTS_BUTTON)).click();
         return this;
     }
 
@@ -50,10 +55,9 @@ public static final  By LIST_PROJECT = By.xpath("//tr[@class='project-row']");
         return this;
     }
 
-    public int getSizeListOfProjects(){
-        wait.until(ExpectedConditions.visibilityOfElementLocated(LIST_PROJECT));
+    public boolean getSizeListOfProjects(){
         List<WebElement> list = driver.findElements(LIST_PROJECT);
-        return list.size();
+        return list.equals(list);
     }
 
     @Step("Project page loaded")

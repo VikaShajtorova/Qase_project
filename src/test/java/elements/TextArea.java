@@ -11,7 +11,6 @@ public class TextArea {
     String label;
     String textAreaLocator = "//label[text()='Description']/ancestor::div[@class='gZ7f7w']//textarea";
 
-//label[text()='%s']/ancestor::div[contains(@class,'form-group')]//p
     public TextArea(WebDriver driver, String label) {
         this.driver = driver;
         this.label = label;

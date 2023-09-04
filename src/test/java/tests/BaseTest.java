@@ -3,13 +3,15 @@ package tests;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import io.qameta.allure.Step;
 import lombok.extern.log4j.Log4j2;
-import models.EmailFactory;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import pages.*;
+import pages.createCase.AttachmentsCasePage;
+import pages.createCase.CasePage;
+import pages.sideMenuProject.*;
 import utils.PropertyReader;
 
 import java.util.concurrent.TimeUnit;
@@ -27,6 +29,11 @@ public class BaseTest {
     SuiteModalPage suiteModalPage;
     CasePage casePage;
     AttachmentsCasePage attachmentsCasePage;
+    SharedStepPage sharedStepPage;
+    CreateSharedStepPage createSharedStepPage;
+    TestPlansPage testPlansPage;
+    CreateTestPlanPage createTestPlanPage;
+    SelectTestCasesPage selectTestCasesPage;
 
 
     @Step("Setting up and opening the browser")
@@ -53,6 +60,12 @@ public class BaseTest {
         suiteModalPage = new SuiteModalPage(driver);
         casePage = new CasePage(driver);
         attachmentsCasePage = new AttachmentsCasePage(driver);
+        sharedStepPage = new SharedStepPage(driver);
+        createSharedStepPage = new CreateSharedStepPage(driver);
+        testPlansPage = new TestPlansPage(driver);
+        createTestPlanPage = new CreateTestPlanPage(driver);
+        selectTestCasesPage = new SelectTestCasesPage(driver);
+
 
     }
 

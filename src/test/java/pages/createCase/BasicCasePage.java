@@ -1,4 +1,4 @@
-package pages;
+package pages.createCase;
 
 import elements.DropDown;
 import elements.Input;
@@ -7,8 +7,9 @@ import io.qameta.allure.Step;
 import lombok.extern.log4j.Log4j2;
 import models.Case;
 import org.openqa.selenium.WebDriver;
+
 @Log4j2
-public class BasicCasePage extends CasePage{
+public class BasicCasePage extends CasePage {
     @Step("Fill in the Basic fields by label")
     public BasicCasePage fillInBasicFields(Case caseBasic){
         new Input(driver,"Title").write(caseBasic.getTitle());

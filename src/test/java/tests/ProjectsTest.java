@@ -38,11 +38,15 @@ public class ProjectsTest extends BaseTest{
 
     @Test
     public void userCreatesProject1(){
-        loginPage.userRegistersWithValidData();
-        int size = projectsPage.getSizeListOfProjects();
+        loginPage.userRegistersWithValidData()
+                .clickCreateNewProjectButton();
+        Project project = ProjectFactory.fillInAllFieldsOfProject();
+        projectModalPage.createProject(project);
+        projectsPage.clickProjectButton();
+        boolean list1 = projectsPage.getSizeListOfProjects();
         projectsPage.deleteLatestProject();
-        int size2 = projectsPage.getSizeListOfProjects();
+        boolean list2 = projectsPage.getSizeListOfProjects();
 
-        assertNotEquals(size,size2);//TODO доделать
+        assertNotEquals(list2,list1,"Списки равны");//TODO доделать
     }
 }

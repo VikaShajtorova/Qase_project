@@ -30,6 +30,6 @@ public class SuiteModalPage extends BasePage{
 
     @Override
     public boolean isPageOpen() {
-        return false;
+        return isExist(CREATE_NEW_SUITE_TITLE);
     }
 }

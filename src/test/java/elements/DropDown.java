@@ -15,7 +15,8 @@ public class DropDown {
     String label;
     WebDriverWait wait;
     String dropDownLocator = "//label[text()='%s']/ancestor::div[contains(@class,'col-sm-12')]//div[@class='Thgbhj euhZGB cfvQxI']";
-    String dropDownMilestone = "//label[text()='Milestone']/ancestor::div[contains(@class,'form-group')]//div[contains(@class,'notranslate')]";
+    String dropDownMilestone = "//label[text()='Milestone']/ancestor::div[contains(@class,'form-group')]" +
+            "//div[contains(@class,'notranslate')]";
     String dropDownTags = "//div[text()='Select...']/ancestor::div[@class='flex-grow-1 css-2b097c-container']";
     String optionLocator = "//div[@class='vp8Qwu']//div//div//div[text()='%s']";
     String optionLocatorMilestone = "//div[@class=' css-7dqksl']//div[text()='%s']";

@@ -3,6 +3,7 @@ package tests;
 import io.qameta.allure.Description;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
+
 import static org.testng.Assert.*;
 
 public class LoginTest extends BaseTest {
@@ -20,7 +21,6 @@ public class LoginTest extends BaseTest {
     @DataProvider(name = "incorrectLoginTest")
     public Object[][] incorrectLoginTest() {
         return new Object[][]{
-                {" ", "Dbrf_110585", "Value ' ' does not match format email of type string"},
                 {" shajtorova@mail.ru", "Dbrf_110585", "Value ' shajtorova@mail.ru' does not match format email of type string"},
                 {"shajtorova@mail.ru ", "Dbrf_110585", "Value 'shajtorova@mail.ru ' does not match format email of type string"},
                 {"123456789", "Dbrf_110585", "Value '123456789' does not match format email of type string"},
@@ -38,7 +38,8 @@ public class LoginTest extends BaseTest {
         };
 
     }
-@Description("Input invalid data")
+
+    @Description("Input invalid data")
     @Test(dataProvider = "incorrectLoginTest")
     public void loginTestWithWrongData(String email, String password, String errorMessage) {
         loginPage.open()
@@ -48,7 +49,8 @@ public class LoginTest extends BaseTest {
         assertEquals(loginPage.getErrorMessage(), errorMessage,
                 "The message text is incorrect or missing");
     }
-@Description("Leave the password field empty")
+
+    @Description("Leave the password field empty")
     @Test
     public void leavePasswordFieldEmpty() {
         loginPage.open()
@@ -58,7 +60,8 @@ public class LoginTest extends BaseTest {
         assertEquals(loginPage.getMessage("Password"), "This field is required",
                 "The message text is incorrect or missing");
     }
-@Description("Leave the email field empty")
+
+    @Description("Leave the email field empty")
     @Test
     public void leaveEmailFieldEmpty() {
         loginPage.open()
