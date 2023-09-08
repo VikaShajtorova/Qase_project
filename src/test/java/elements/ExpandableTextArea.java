@@ -14,9 +14,7 @@ public class ExpandableTextArea {
     WebDriver driver;
     WebDriverWait wait;
     String label;
-    String expandableTextArea = "//label[text()='Post-conditions']/ancestor::div[contains(@class,'sm-12 form-group')]//p";
-    //label[text()='Post-conditions']/ancestor::div[contains(@class,'sm-12 form-group')]//p
-//label[text()='Description']/ancestor::div[contains(@class,'qaOPP6')]//p
+    String expandableTextArea = "//label[text()='%s']/ancestor::div[contains(@class,'sm-12 form-group')]//p";
 
     public ExpandableTextArea(WebDriver driver, String label) {
         this.driver = driver;

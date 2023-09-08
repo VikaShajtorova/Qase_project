@@ -1,5 +1,6 @@
 package tests;
 
+import io.qameta.allure.Description;
 import models.Project;
 import models.ProjectFactory;
 import org.testng.annotations.Test;
@@ -52,6 +53,23 @@ public class ProjectsTest extends BaseTest{
 
         assertEquals(projectSettingsPage.getTextAlertMessageOnSettingsPage(), "Project settings were successfully updated!",
                 "The message is missing or does not match");
+    }
+    @Description("Add a filter in the project")
+    @Test
+    public void addFilterInProject(){
+        loginPage.userRegistersWithValidData()
+                .clickProjectButton()
+                .clickCreateNewProjectButton();
+        Project project = ProjectFactory.fillInOnlyProjectNameField();
+        projectModalPage.fillInOnlyProjectNameField(project);
+                repositoryPage.clickAddFilterButton()
+                .selectFilterFromList()
+                .selectOptionFromCheckbox();
+
+                assertEquals(repositoryPage.getTextNameFilter(),"Priority: Not set","The message is missing or does not match");
+
+
+
     }
 
     @Test

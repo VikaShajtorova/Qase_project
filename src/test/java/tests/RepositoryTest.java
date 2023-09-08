@@ -48,12 +48,15 @@ public class RepositoryTest extends BaseTest {
                 "The message is missing or does not match");
     }
 
+    @Description("The user creates a case by filling in all the fields")
     @Test
-    public void userCreateCase() {
+    public void userCreateCaseByFillingInAllFields() {
         loginPage.userRegistersWithValidData()
                 .clickProjectButton()
                 .clickCreateNewProjectButton();
-        repositoryPage.clickCaseButton();
+        Project project = ProjectFactory.fillInRequiredFieldsOfProject();
+        projectModalPage.fillInRequiredFieldsOfProject(project)
+                .clickCaseButton();
         Case caseBasic = CaseFactory.fillInAllFieldsOfBasicCase();
         new BasicCasePage(driver).fillInBasicFields(caseBasic);
         Case caseConditions = CaseFactory.fillInAllFieldsOfConditionsCase();
