@@ -50,8 +50,8 @@ public class ProjectsTest extends BaseTest{
         projectSettingsPage.changeDataInProjectFields(settingsProject)
                 .clickUpdateSettingsButton();
 
-        assertEquals(repositoryPage.getTextOfMessageAboutDeletionOfSuite(), "Project settings were successfully updated!",
-                "The message is missing or does not match");//TODO доделать
+        assertEquals(projectSettingsPage.getTextAlertMessageOnSettingsPage(), "Project settings were successfully updated!",
+                "The message is missing or does not match");
     }
 
     @Test

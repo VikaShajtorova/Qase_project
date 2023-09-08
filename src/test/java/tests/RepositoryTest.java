@@ -25,7 +25,7 @@ public class RepositoryTest extends BaseTest {
                 .createSuiteByFillingInRequiredFields()
                 .clickCreateButton();
 
-        assertEquals(repositoryPage.getTextOfMessageAboutCreationOfSuite(), "Suite was successfully created.",
+        assertEquals(repositoryPage.getTextAlertMessageOnRepositoryPage(), "Suite was successfully created.",
                 "The message is missing or does not match");
     }
 
@@ -44,7 +44,7 @@ public class RepositoryTest extends BaseTest {
                 .clickDeleteButtonInDropDown()
                 .clickDeleteButton();
 
-        assertEquals(repositoryPage.getTextOfMessageAboutDeletionOfSuite(), "Suite was successfully deleted.",
+        assertEquals(repositoryPage.getTextAlertMessageOnRepositoryPage(), "Suite was successfully deleted.",
                 "The message is missing or does not match");
     }
 
@@ -66,7 +66,7 @@ public class RepositoryTest extends BaseTest {
         new ParametersCasePage(driver).fillInTestCaseStepsFields(caseStep)
                 .clickSaveButton();
 
-        assertEquals(repositoryPage.getTextOfMessageAboutDeletionOfSuite(), "Test case was created successfully!",
+        assertEquals(repositoryPage.getTextAlertMessageOnRepositoryPage(), "Test case was created successfully!",
                 "The message is missing or does not match");
     }
 

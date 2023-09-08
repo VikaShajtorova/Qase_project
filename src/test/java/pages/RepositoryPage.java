@@ -56,9 +56,9 @@ public class RepositoryPage extends BasePage {
         return messageCreateSuite;
     }
 
-    @Step("Get a message about deletion suites")
-    public String getTextOfMessageAboutDeletionOfSuite() {
-        String messageDeleteSuite = wait.until(ExpectedConditions.visibilityOfElementLocated(DELETE_SUITE_MESSAGE)).getText();
+    @Step("Пet the text of the alert message on the RepositoryPage")
+    public String getTextAlertMessageOnRepositoryPage() {
+        String messageDeleteSuite = wait.until(ExpectedConditions.visibilityOfElementLocated(ALERT_MESSAGE)).getText();
         log.info("Get a message about creating suites: " +messageDeleteSuite);
         return messageDeleteSuite;
     }
