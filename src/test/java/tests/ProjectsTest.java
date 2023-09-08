@@ -37,7 +37,25 @@ public class ProjectsTest extends BaseTest{
     }
 
     @Test
-    public void userCreatesProject1(){
+    public void userChangeProjectSettings(){
+        loginPage.userRegistersWithValidData()
+                .clickProjectButton()
+                .clickCreateNewProjectButton();
+        Project project = ProjectFactory.fillInOnlyProjectNameField();
+        projectModalPage.fillInOnlyProjectNameField(project);
+        projectsPage.clickProjectButton()
+                .clickDropdownProject()
+                .clickSettingsButton();
+        Project settingsProject = ProjectFactory.fillInAllFieldsOfProject();
+        projectSettingsPage.changeDataInProjectFields(settingsProject)
+                .clickUpdateSettingsButton();
+
+        assertEquals(repositoryPage.getTextOfMessageAboutDeletionOfSuite(), "Project settings were successfully updated!",
+                "The message is missing or does not match");//TODO доделать
+    }
+
+    @Test
+    public void userDeleteProject(){
         loginPage.userRegistersWithValidData()
                 .clickCreateNewProjectButton();
         Project project = ProjectFactory.fillInAllFieldsOfProject();

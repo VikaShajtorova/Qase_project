@@ -34,6 +34,7 @@ public class BaseTest {
     TestPlansPage testPlansPage;
     CreateTestPlanPage createTestPlanPage;
     SelectTestCasesPage selectTestCasesPage;
+    ProjectSettingsPage projectSettingsPage;
 
 
     @Step("Setting up and opening the browser")
@@ -65,6 +66,7 @@ public class BaseTest {
         testPlansPage = new TestPlansPage(driver);
         createTestPlanPage = new CreateTestPlanPage(driver);
         selectTestCasesPage = new SelectTestCasesPage(driver);
+        projectSettingsPage = new ProjectSettingsPage(driver);
 
 
     }

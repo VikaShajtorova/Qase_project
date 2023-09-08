@@ -16,7 +16,12 @@ public class RepositoryPage extends BasePage {
     public static final By REPOSITORY_TITLE = By.xpath("//h1[@class='fGDnu0']");
     public static final By SUITE_BUTTON = By.id("create-suite-button");
     public static final By CASE_BUTTON = By.id("create-case-button");
-    public static final By CREATE_SUITE_MESSAGE = By.xpath("//div[@role='alert']//span[text()='Suite was successfully created.']");
+    public static final By CREATE_SUITE_MESSAGE = By.xpath("//div[@role='alert']//span[@class='ic9QAx']");
+    public static final By DELETE_SUITE_MESSAGE = By.xpath("//div[@role='alert']//span[@class='ic9QAx']");
+    //Test case was created successfully!
+    public static final By LAST_SUITE_ON_LIST = By.xpath("(//div[@class='sNpl0d']//i)[last()]");
+    public static final By DELETE_BUTTON_IN_DROPDOWN = By.xpath("//div//i[@class='fas fa-trash' or text()='Delete']");
+    public static final By DELETE_BUTTON = By.xpath("//button[@type='submit']//span[text()='Delete']");
     public static final By SHARED_STEPS_BUTTON = By.xpath("//a[@title='Shared Steps']");
     public static final By LIST_SUITES = By.xpath("//div[@class='sNpl0d']");
     public RepositoryPage(WebDriver driver) {
@@ -40,23 +45,55 @@ public class RepositoryPage extends BasePage {
     @Step("Click Case button")
     public CasePage clickCaseButton(){
         driver.findElement(CASE_BUTTON).click();
-        log.info("");//TODO
+        log.info("Click Case button");
         return new CasePage(driver);
     }
 
     @Step("Get a message about creating suites")
     public String getTextOfMessageAboutCreationOfSuite() {
-        log.info("Get a message about creating suites: " + getTextOfMessageAboutCreationOfSuite());
-        return driver.findElement(CREATE_SUITE_MESSAGE).getText();
+        String messageCreateSuite = wait.until(ExpectedConditions.visibilityOfElementLocated(CREATE_SUITE_MESSAGE)).getText();
+        log.info("Get a message about creating suites: " +messageCreateSuite);
+        return messageCreateSuite;
     }
+
+    @Step("Get a message about deletion suites")
+    public String getTextOfMessageAboutDeletionOfSuite() {
+        String messageDeleteSuite = wait.until(ExpectedConditions.visibilityOfElementLocated(DELETE_SUITE_MESSAGE)).getText();
+        log.info("Get a message about creating suites: " +messageDeleteSuite);
+        return messageDeleteSuite;
+    }
+
+    @Step("Click Shared Steps button")
     public SharedStepPage clickSharedStepsButton(){
         driver.findElement(SHARED_STEPS_BUTTON).click();
+        log.info("Click Shared Steps button");
         return new SharedStepPage(driver);
     }
 
     public RepositoryPage selectSuiteFromList(){
         List<WebElement> list = driver.findElements(LIST_SUITES);
         list.get(0).click();
+        return this;
+    }
+
+    @Step("Click to the last suite in the list")
+    public RepositoryPage clickToLastSuiteInList() {
+        driver.findElement(LAST_SUITE_ON_LIST).click();
+        log.info("Click to the last suite in the list");
+        return this;
+    }
+
+    @Step("Click the Delete button in drop down")
+    public RepositoryPage clickDeleteButtonInDropDown(){
+        driver.findElement(DELETE_BUTTON_IN_DROPDOWN).click();
+        log.info("Click the Delete button in drop down");
+        return this;
+    }
+
+    @Step("Click the Delete button")
+    public RepositoryPage clickDeleteButton(){
+        driver.findElement(DELETE_BUTTON).click();
+        log.info("Click the Delete button");
         return this;
     }
 
