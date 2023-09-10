@@ -19,6 +19,7 @@ public class CreateSharedStepPage extends BasePage {
         super(driver);
     }
 
+    @Step("Input in field shared step Title")
     public CreateSharedStepPage inputInFieldSharedStepTitle(SharedStep stepTitle) {
         new Input(driver, "Shared step title").write(stepTitle.getSharedStepTitle());
         return this;
@@ -27,7 +28,7 @@ public class CreateSharedStepPage extends BasePage {
     @Step("Click Add step button")
     public CreateSharedStepPage clickAddStepButton() {
         driver.findElement(ADD_STEP_BUTTON).click();
-        log.info("Click the Add step button");
+        log.info("Find the item: " + ADD_STEP_BUTTON + " and click");
         return this;
     }
 
@@ -42,10 +43,11 @@ public class CreateSharedStepPage extends BasePage {
     @Step("Click the Create button")
     public SharedStepPage clickCreateButton() {
         driver.findElement(CREATE_BUTTON).click();
-        log.info("Click the Create button");
+        log.info("Find the item: " + CREATE_BUTTON + " and click");
         return new SharedStepPage(driver);
     }
 
+    @Step("CreateSharedStepPage loaded")
     @Override
     public boolean isPageOpen() {
         return isExist(SHARED_STEPS_LIST_TITLE);

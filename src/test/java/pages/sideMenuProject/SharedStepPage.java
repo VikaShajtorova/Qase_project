@@ -8,22 +8,27 @@ import pages.BasePage;
 
 @Log4j2
 public class SharedStepPage extends BasePage {
-    public static final By CREATE_SHARED_STEP_BUTTON = By.xpath("//span[text()='Create shared step']");
-    public static final By CREATE_SHARED_STEP_MESSAGE = By.xpath("//span[text()='Shared step was created successfully!']");
+    public static final By CREATE_SHARED_STEP_BUTTON = By.xpath("//a//span[@class='ZwgkIF' or text()='Create shared step']");
+
     public SharedStepPage(WebDriver driver) {
         super(driver);
     }
+
     @Step("Click the Create shared step button")
-    public CreateSharedStepPage clickCreateSharedStepButton(){
+    public CreateSharedStepPage clickCreateSharedStepButton() {
         driver.findElement(CREATE_SHARED_STEP_BUTTON).click();
-        log.info("Click the Create shared step button");
+        log.info("Find the item: " + CREATE_SHARED_STEP_BUTTON + " and click");
         return new CreateSharedStepPage(driver);
     }
-    public String getMessageAboutCreatingSharedStep(){
-        String message = driver.findElement(CREATE_SHARED_STEP_MESSAGE).getText();
+
+    @Step("Get the text of the alert message on the SharedStepPage")
+    public String getMessageAboutCreatingSharedStep() {
+        String message = driver.findElement(ALERT_MESSAGE).getText();
+        log.info("Get a message about creating suites: " + message);
         return message;
     }
 
+    @Step("SharedStepPage loaded")
     @Override
     public boolean isPageOpen() {
         return isExist(CREATE_SHARED_STEP_BUTTON);

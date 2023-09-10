@@ -1,13 +1,14 @@
 package tests;
 
-import models.Project;
-import models.ProjectFactory;
-import models.TestPlan;
-import models.TestPlanFactory;
+import io.qameta.allure.Description;
+import models.*;
 import org.testng.annotations.Test;
-import pages.sideMenuProject.CreateTestPlanPage;
+import tests.base.BaseTest;
 
-public class TestPlanTest extends BaseTest{
+import static org.testng.Assert.assertEquals;
+
+public class TestPlanTest extends BaseTest {
+    @Description("User create a test plan")
     @Test
     public void userCreateTestPlan(){
         loginPage.userRegistersWithValidData()
@@ -15,12 +16,14 @@ public class TestPlanTest extends BaseTest{
                 .clickCreateNewProjectButton();
         Project project = ProjectFactory.fillInAllFieldsOfProject();
         projectModalPage.createProject(project)
-                .clickSuiteButton()
-                .createSuite()
+                .clickSuiteButton();
+        Suite createSuite = SuiteFactory.fillInOnlyRequiredSuitesField();
+        suiteModalPage.createSuiteByFillingInRequiredFields(createSuite)
                 .clickCreateButton();
         repositoryPage.selectSuiteFromList()
-        .clickCaseButton()
-                .createCase()
+        .clickCaseButton();
+        Case caseBasic = CaseFactory.fillInTitleFieldInCase();
+        basicCasePage.fillInTitleFieldInCase(caseBasic)
                 .clickSaveButton();
         testPlansPage.clickTestPlanButton()
                 .clickCreatePlanButton();
@@ -30,7 +33,8 @@ public class TestPlanTest extends BaseTest{
                 .selectSuiteFromList()
                 .clickDoneButton();
 
-
-
+        assertEquals(testPlansPage.getTextAlertMessageOnTestPlansPage(), "Test plan was created successfully!",
+                "The message is missing or does not match");
+        projectsPage.deleteLatestProjectAfterTest();
     }
 }

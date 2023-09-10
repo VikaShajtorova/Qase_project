@@ -1,19 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
-<suite name="Regression Test" parallel="tests" thread-count="2">
-    <test name="запуск в chrome">
-        <parameter name="browser" value="chrome"/>
+<suite thread-count="3" name="Test suite" parallel="tests">
+    <test name="Stream 1">
         <classes>
-            <class name="  "/>
+            <class name="tests.LoginTest"/>
+            <class name="tests.ProjectsTest"/>
         </classes>
     </test> <!-- Test -->
 
-
-    <test name="запуск в edge">
-        <parameter name="browser" value="edge"/>
+    <test name="Stream 2">
         <classes>
-            <class name="  "/>
+            <class name="tests.RepositoryTest"/>
         </classes>
     </test> <!-- Test -->
 
+    <test name="Stream 3">
+        <classes>
+            <class name="tests.TestRunsTest"/>
+            <class name="tests.TestPlanTest"/>
+            <class name="tests.SharedStepTest"/>
+        </classes>
+    </test> <!-- Test -->
 </suite>

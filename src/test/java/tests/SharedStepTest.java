@@ -7,6 +7,7 @@ import models.SharedStep;
 import models.SharedStepFactory;
 import static org.testng.Assert.*;
 import org.testng.annotations.Test;
+import tests.base.BaseTest;
 
 public class SharedStepTest extends BaseTest {
     @Description("Create Shared steps")
@@ -28,5 +29,6 @@ public class SharedStepTest extends BaseTest {
 
         assertEquals(sharedStepPage.getMessageAboutCreatingSharedStep(),"Shared step was created successfully!",
                 "The message is missing or does not match");
+        projectsPage.deleteLatestProjectAfterTest();
     }
 }

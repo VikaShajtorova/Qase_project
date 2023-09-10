@@ -3,14 +3,9 @@ package tests;
 import static org.testng.Assert.*;
 
 import io.qameta.allure.Description;
-import models.Case;
-import models.CaseFactory;
-import models.Project;
-import models.ProjectFactory;
+import models.*;
 import org.testng.annotations.Test;
-import pages.createCase.BasicCasePage;
-import pages.createCase.ConditionsCasePage;
-import pages.createCase.ParametersCasePage;
+import tests.base.BaseTest;
 
 public class RepositoryTest extends BaseTest {
     @Description("The user creates a suite by filling in all the fields")
@@ -21,12 +16,14 @@ public class RepositoryTest extends BaseTest {
                 .clickCreateNewProjectButton();
         Project project = ProjectFactory.fillInRequiredFieldsOfProject();
         projectModalPage.fillInRequiredFieldsOfProject(project)
-                .clickSuiteButton()
-                .createSuiteByFillingInRequiredFields()
+                .clickSuiteButton();
+        Suite createSuite = SuiteFactory.fillInAllFieldsOfSuite();
+        suiteModalPage.createSuite(createSuite)
                 .clickCreateButton();
 
         assertEquals(repositoryPage.getTextAlertMessageOnRepositoryPage(), "Suite was successfully created.",
                 "The message is missing or does not match");
+        projectsPage.deleteLatestProjectAfterTest();
     }
 
     @Description("The user delete a suite")
@@ -37,8 +34,9 @@ public class RepositoryTest extends BaseTest {
                 .clickCreateNewProjectButton();
         Project project = ProjectFactory.fillInRequiredFieldsOfProject();
         projectModalPage.fillInRequiredFieldsOfProject(project)
-                .clickSuiteButton()
-                .createSuiteByFillingInRequiredFields()
+                .clickSuiteButton();
+        Suite createSuite = SuiteFactory.fillInAllFieldsOfSuite();
+        suiteModalPage.createSuiteByFillingInRequiredFields(createSuite)
                 .clickCreateButton();
         repositoryPage.clickToLastSuiteInList()
                 .clickDeleteButtonInDropDown()
@@ -46,6 +44,76 @@ public class RepositoryTest extends BaseTest {
 
         assertEquals(repositoryPage.getTextAlertMessageOnRepositoryPage(), "Suite was successfully deleted.",
                 "The message is missing or does not match");
+        projectsPage.deleteLatestProjectAfterTest();
+    }
+
+    @Description("The user edits the suite")
+    @Test
+    public void userEditsSuite() {
+        loginPage.userRegistersWithValidData()
+                .clickProjectButton()
+                .clickCreateNewProjectButton();
+        Project project = ProjectFactory.fillInRequiredFieldsOfProject();
+        projectModalPage.fillInRequiredFieldsOfProject(project)
+                .clickSuiteButton();
+        Suite createSuite = SuiteFactory.fillInAllFieldsOfSuite();
+        suiteModalPage.createSuiteByFillingInRequiredFields(createSuite)
+                .clickCreateButton()
+                .invisibilityOfElementLocated()
+                .clickToLastSuiteInList()
+                .clickEditButtonInDropDown();
+        Suite editSuite = SuiteFactory.fillInAllFieldsOfSuite();
+        editSuitePage.editsSuite(editSuite);
+
+        assertEquals(repositoryPage.getTextAlertMessageOnRepositoryPage(), "Suite was successfully edited.",
+                "The message is missing or does not match");
+        projectsPage.deleteLatestProjectAfterTest();
+
+    }
+
+    @Description("The user clone the suite")
+    @Test
+    public void userCloneSuite() {
+        loginPage.userRegistersWithValidData()
+                .clickProjectButton()
+                .clickCreateNewProjectButton();
+        Project project = ProjectFactory.fillInRequiredFieldsOfProject();
+        projectModalPage.fillInRequiredFieldsOfProject(project)
+                .clickSuiteButton();
+        Suite createSuite = SuiteFactory.fillInAllFieldsOfSuite();
+        suiteModalPage.createSuiteByFillingInRequiredFields(createSuite)
+                .clickCreateButton()
+                .invisibilityOfElementLocated()
+                .clickToLastSuiteInList()
+                .clickCloneButtonInDropDown()
+                .clickCloneButtonOnSuiteModalPage();
+
+        assertEquals(repositoryPage.getTextAlertMessageOnRepositoryPage(), "Suite was successfully cloned ",
+                "The message is missing or does not match");
+        projectsPage.deleteLatestProjectAfterTest();
+    }
+
+    @Description("The user creates a sub suite")
+    @Test
+    public void userCreatesSubSuite() {
+        loginPage.userRegistersWithValidData()
+                .clickProjectButton()
+                .clickCreateNewProjectButton();
+        Project project = ProjectFactory.fillInRequiredFieldsOfProject();
+        projectModalPage.fillInRequiredFieldsOfProject(project)
+                .clickSuiteButton();
+        Suite createSuite = SuiteFactory.fillInAllFieldsOfSuite();
+        suiteModalPage.createSuiteByFillingInRequiredFields(createSuite)
+                .clickCreateButton()
+                .clickToLastSuiteInList()
+                .clickCreateSuiteButtonInDropDown();
+        Suite createSubSuite = SuiteFactory.fillInAllFieldsOfSuite();
+        suiteModalPage.createSuiteByFillingInRequiredFields(createSubSuite)
+                .clickCreateButton();
+
+        assertEquals(repositoryPage.getTextAlertMessageOnRepositoryPage(), "Suite was successfully created.",
+                "The message is missing or does not match");
+        projectsPage.deleteLatestProjectAfterTest();
     }
 
     @Description("The user creates a case by filling in all the fields")
@@ -58,30 +126,103 @@ public class RepositoryTest extends BaseTest {
         projectModalPage.fillInRequiredFieldsOfProject(project)
                 .clickCaseButton();
         Case caseBasic = CaseFactory.fillInAllFieldsOfBasicCase();
-        new BasicCasePage(driver).fillInBasicFields(caseBasic);
+        basicCasePage.fillInBasicFields(caseBasic);
         Case caseConditions = CaseFactory.fillInAllFieldsOfConditionsCase();
-        new ConditionsCasePage(driver).fillInConditionsFields(caseConditions);
-        new ParametersCasePage(driver).clickAddParameterButton();
+        conditionsCasePage.fillInConditionsFields(caseConditions);
+        parametersCasePage.clickAddParameterButton();
         Case caseParameter = CaseFactory.fillInAllFieldsOfAddParameter();
-        new ParametersCasePage(driver).fillInParametersFields(caseParameter);
-        new ParametersCasePage(driver).clickAddStepButton();
+        parametersCasePage.fillInParametersFields(caseParameter)
+                .clickAddStepButton();
         Case caseStep = CaseFactory.fillInAllFieldsOfAddStep();
-        new ParametersCasePage(driver).fillInTestCaseStepsFields(caseStep)
+        parametersCasePage.fillInTestCaseStepsFields(caseStep)
                 .clickSaveButton();
 
         assertEquals(repositoryPage.getTextAlertMessageOnRepositoryPage(), "Test case was created successfully!",
                 "The message is missing or does not match");
+        projectsPage.deleteLatestProjectAfterTest();
     }
 
+    @Description("The user delete a case")
+    @Test
+    public void userDeleteCase() {
+        loginPage.userRegistersWithValidData()
+                .clickProjectButton()
+                .clickCreateNewProjectButton();
+        Project project = ProjectFactory.fillInRequiredFieldsOfProject();
+        projectModalPage.fillInRequiredFieldsOfProject(project)
+                .clickCaseButton();
+        Case caseBasic = CaseFactory.fillInAllFieldsOfBasicCase();
+        basicCasePage.fillInBasicFields(caseBasic)
+                .clickSaveButton()
+                .selectCaseFromList()
+                .deleteCase();
+
+        assertTrue(repositoryPage.checksThatListIsDisplayed(), "The list contains cases");
+        projectsPage.deleteLatestProjectAfterTest();
+    }
+
+    @Description("The user clone a case")
+    @Test
+    public void userCloneCase() {
+        loginPage.userRegistersWithValidData()
+                .clickProjectButton()
+                .clickCreateNewProjectButton();
+        Project project = ProjectFactory.fillInRequiredFieldsOfProject();
+        projectModalPage.fillInRequiredFieldsOfProject(project)
+                .clickCaseButton();
+        Case caseBasic = CaseFactory.fillInAllFieldsOfBasicCase();
+        basicCasePage.fillInTitleFieldInCase(caseBasic)
+                .clickSaveButton()
+                .invisibilityOfElementLocated()
+                .selectCaseFromList()
+                .clickCloneButtonOnCaseModalPage()
+                .clickCloneButtonOnCloneCaseModalPage();
+
+        assertEquals(repositoryPage.getTextAlertMessageOnRepositoryPage(), "Case was successfully cloned",
+                "The message is missing or does not match");
+        projectsPage.deleteLatestProjectAfterTest();
+    }
+
+    @Description("The user Edit a case")
+    @Test
+    public void userEditCase() {
+        loginPage.userRegistersWithValidData()
+                .clickProjectButton()
+                .clickCreateNewProjectButton();
+        Project project = ProjectFactory.fillInRequiredFieldsOfProject();
+        projectModalPage.fillInRequiredFieldsOfProject(project)
+                .clickCaseButton();
+        Case caseBasic = CaseFactory.fillInAllFieldsOfBasicCase();
+        basicCasePage.fillInTitleFieldInCase(caseBasic)
+                .clickSaveButton()
+                .selectCaseFromList()
+                .clickEditButtonOnCaseModalPage();
+        Case caseBasicEdit = CaseFactory.fillInAllFieldsOfBasicCase();
+        basicCasePage.fillInTitleFieldInCase(caseBasicEdit)
+                .clickSaveButton();
+
+        assertEquals(repositoryPage.getTextAlertMessageOnRepositoryPage(), "Test case was edited successfully!",
+                "The message is missing or does not match");
+        projectsPage.deleteLatestProjectAfterTest();
+    }
+    @Description("Check the file download")
     @Test
     public void checkFileDownload() {
-        loginPage.userRegistersWithValidData();
-        projectsPage.getLatestProjectInListAndClick();
-        repositoryPage.clickCaseButton();
+        loginPage.userRegistersWithValidData()
+                .clickProjectButton()
+                .clickCreateNewProjectButton();
+        Project project = ProjectFactory.fillInRequiredFieldsOfProject();
+        projectModalPage.fillInRequiredFieldsOfProject(project)
+                .clickCaseButton();
+        Case caseBasic = CaseFactory.fillInAllFieldsOfBasicCase();
+        basicCasePage.fillInBasicFields(caseBasic);
         attachmentsCasePage.clickAddAttachmentButton();
         attachmentsCasePage.downloadFile();
+        String fileName = attachmentsCasePage.getFileName();
+        casePage.clickSaveButton();
 
-        assertEquals(attachmentsCasePage.getFileName(), "Screenshot_8.png", "имя файла не совпадает");
+        assertEquals(fileName, "Screenshot_8.png", "The file name does not match");
+        projectsPage.deleteLatestProjectAfterTest();
     }
 
 }

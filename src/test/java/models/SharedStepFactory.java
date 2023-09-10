@@ -2,6 +2,7 @@ package models;
 
 import com.github.javafaker.Faker;
 import io.qameta.allure.Step;
+
 public class SharedStepFactory {
     static Faker faker = new Faker();
 

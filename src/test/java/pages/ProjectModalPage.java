@@ -20,14 +20,14 @@ public class ProjectModalPage extends BasePage {
     @Step("Click the create project button")
     public RepositoryPage clickCreateProjectButton() {
         driver.findElement(CREATE_BUTTON).click();
-        log.info("Find xpath and click: " + CREATE_BUTTON);
+        log.info("Find the item: " + CREATE_BUTTON + " and click");
         return new RepositoryPage(driver);
     }
 
     @Step("Click the cancel button")
     public ProjectsPage clickCancelButton() {
         driver.findElement(CANCEL_BUTTON).click();
-        log.info("Find xpath and click: " + CANCEL_BUTTON);
+        log.info("Find the item: " + CANCEL_BUTTON + " and click");
         return new ProjectsPage(driver);
     }
 
@@ -54,7 +54,7 @@ public class ProjectModalPage extends BasePage {
         return clickCreateProjectButton();
     }
 
-    @Step("ProjectModal page loaded")
+    @Step("ProjectModalPage loaded")
     @Override
     public boolean isPageOpen() {
         return isExist(CREATE_NEW_PROJECT_TITLE);

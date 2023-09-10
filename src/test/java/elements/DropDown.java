@@ -17,18 +17,15 @@ public class DropDown {
     String dropDownLocator = "//label[text()='%s']/ancestor::div[contains(@class,'col-sm-12')]//div[@class='Thgbhj euhZGB cfvQxI']";
     String dropDownMilestone = "//label[text()='Milestone']/ancestor::div[contains(@class,'form-group')]" +
             "//div[contains(@class,'notranslate')]";
-    String dropDownTags = "//div[text()='Select...']/ancestor::div[@class='flex-grow-1 css-2b097c-container']";
     String optionLocator = "//div[@class='vp8Qwu']//div//div//div[text()='%s']";
     String optionLocatorMilestone = "//div[@class=' css-7dqksl']//div[text()='%s']";
-    String optionDropDownTags = "//div[@class='flex-grow-1 css-2b097c-container']//div[contains(@class,'css-12jo7m5')]";
-
+    String dropDownLocatorSuite = "//label[text()='%s']/ancestor::div[contains(@class,'qaOPP6')]//span";
 
     public DropDown(WebDriver driver, String label) {
         this.driver = driver;
         this.label = label;
         wait = new WebDriverWait(driver, Duration.ofSeconds(10));
     }
-
 
     @Step("Select an option from the drop-down list")
     public void selectOption(String option) {
@@ -39,20 +36,18 @@ public class DropDown {
     }
 
     @Step("Select an option from the drop-down list")
-    public void selectOptionMilestone(String option) {
-        wait.until(ExpectedConditions.elementToBeClickable(By.xpath(String.format(dropDownMilestone, this.label)))).click();
+    public void selectOptionSuite(String option) {
+        wait.until(ExpectedConditions.elementToBeClickable(By.xpath(String.format(dropDownLocatorSuite, this.label)))).click();
         log.info("Find the DropDown field by label: " + label + " and clicks");
-        wait.until(ExpectedConditions.elementToBeClickable(By.xpath(String.format(optionLocatorMilestone, option)))).click();
+        wait.until(ExpectedConditions.elementToBeClickable(By.xpath(String.format(optionLocator, option)))).click();
         log.info("Find the DropDown option field by label: " + label + " and clicks");
     }
 
     @Step("Select an option from the drop-down list")
-    public void selectOptionTags(String text, String option) {
-        wait.until(ExpectedConditions.elementToBeClickable(By.xpath(String.format(dropDownTags, this.label)))).click();
+    public void selectOptionMilestone(String option) {
+        wait.until(ExpectedConditions.elementToBeClickable(By.xpath(String.format(dropDownMilestone, this.label)))).click();
         log.info("Find the DropDown field by label: " + label + " and clicks");
-        wait.until(ExpectedConditions.elementToBeClickable(By.xpath(String.format(dropDownTags, this.label)))).sendKeys(text);
-        log.info("Find the input field by label: " + label + " and write text: " + text);
-        wait.until(ExpectedConditions.elementToBeClickable(By.xpath(String.format(optionDropDownTags, option)))).click();
+        wait.until(ExpectedConditions.elementToBeClickable(By.xpath(String.format(optionLocatorMilestone, option)))).click();
         log.info("Find the DropDown option field by label: " + label + " and clicks");
     }
 }

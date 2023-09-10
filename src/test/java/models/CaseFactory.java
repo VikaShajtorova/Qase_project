@@ -2,9 +2,7 @@ package models;
 
 import com.github.javafaker.Faker;
 import io.qameta.allure.Step;
-import lombok.extern.log4j.Log4j2;
 
-@Log4j2
 public class CaseFactory {
     static Faker faker = new Faker();
 
@@ -23,6 +21,13 @@ public class CaseFactory {
                 .priority(faker.expression("High"))
                 .is_Flaky(faker.expression("No"))
                 .automationStatus(faker.expression("Not automated"))
+                .build();
+    }
+
+    @Step("Fill in the title field in the case")
+    public static Case fillInTitleFieldInCase() {
+        return Case.builder()
+                .title(faker.hacker().verb())
                 .build();
     }
 

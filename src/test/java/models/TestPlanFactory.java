@@ -5,6 +5,7 @@ import io.qameta.allure.Step;
 
 public class TestPlanFactory {
     static Faker faker = new Faker();
+
     @Step("Fill in the Test plan fields with random values")
     public static TestPlan fillInPlanDetails() {
         return TestPlan.builder()
