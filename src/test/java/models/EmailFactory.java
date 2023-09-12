@@ -1,7 +1,6 @@
 package models;
 
 import com.github.javafaker.Faker;
-import pages.SignupPage;
 
 public class EmailFactory {
     static Faker faker = new Faker();

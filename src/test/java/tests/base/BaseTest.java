@@ -1,7 +1,5 @@
 package tests.base;
 
-import ignorNotPush.SignupPage;
-import ignorNotPush.SuccessfulRegistrationPage;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import io.qameta.allure.Step;
 import lombok.extern.log4j.Log4j2;
@@ -22,9 +20,7 @@ import java.util.concurrent.TimeUnit;
 @Listeners(TestListener.class)
 public class BaseTest {
     protected WebDriver driver;
-    protected String baseUrl, email, password, passwordRegistration;
-    protected SignupPage signupPage;
-    protected SuccessfulRegistrationPage successfulRegistrationPage;
+    protected String baseUrl, email, password;
     protected LoginPage loginPage;
     protected ProjectsPage projectsPage;
     protected ProjectModalPage projectModalPage;
@@ -60,12 +56,11 @@ public class BaseTest {
         WebDriverManager.chromedriver().setup();
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--start-maximized");
-        options.addArguments("--incognito");
+       // options.addArguments("--headless");
         driver = new ChromeDriver(options);
         driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
 
-        signupPage = new SignupPage(driver);
-        successfulRegistrationPage = new SuccessfulRegistrationPage(driver);
+
         loginPage = new LoginPage(driver);
         projectsPage = new ProjectsPage(driver);
         projectModalPage = new ProjectModalPage(driver);

@@ -16,10 +16,12 @@ public class ProjectsTest extends BaseTest {
                 .clickCreateNewProjectButton();
         Project project = ProjectFactory.fillInAllFieldsOfProject();
         projectModalPage.createProject(project);
-
-        assertTrue(repositoryPage.getProjectCode());
+        boolean getProjectCode = repositoryPage.getProjectCode();
         projectsPage.deleteLatestProjectAfterTest();
+
+        assertTrue(getProjectCode,"The project is missing from the page");
     }
+
     @Description("The user creates a project by filling only required fields")
     @Test
     public void userCreatesProjectByFillingInOnlyRequiredFields() {
@@ -27,9 +29,11 @@ public class ProjectsTest extends BaseTest {
         projectsPage.clickCreateNewProjectButton();
         Project project = ProjectFactory.fillInRequiredFieldsOfProject();
         projectModalPage.fillInRequiredFieldsOfProject(project);
-
-        assertTrue(repositoryPage.getProjectCode());
+        boolean getProjectCode = repositoryPage.getProjectCode();
         projectsPage.deleteLatestProjectAfterTest();
+
+        assertTrue(getProjectCode,"The project is missing from the page");
+
     }
     @Description("The user creates a project by filling only the project name field")
     @Test
@@ -38,9 +42,10 @@ public class ProjectsTest extends BaseTest {
         projectsPage.clickCreateNewProjectButton();
         Project project = ProjectFactory.fillInOnlyProjectNameField();
         projectModalPage.fillInOnlyProjectNameField(project);
-
-        assertTrue(repositoryPage.getProjectCode());
+        boolean getProjectCode = repositoryPage.getProjectCode();
         projectsPage.deleteLatestProjectAfterTest();
+
+        assertTrue(getProjectCode,"The project is missing from the page");
     }
     @Description("The user change the project settings")
     @Test
@@ -48,18 +53,18 @@ public class ProjectsTest extends BaseTest {
         loginPage.userRegistersWithValidData()
                 .clickProjectButton()
                 .clickCreateNewProjectButton();
-        Project project = ProjectFactory.fillInOnlyProjectNameField();
-        projectModalPage.fillInOnlyProjectNameField(project);
+        Project project = ProjectFactory.fillInRequiredFieldsOfProject();
+        projectModalPage.fillInRequiredFieldsOfProject(project);
         projectsPage.clickProjectButton()
                 .clickDropdownProject()
                 .clickSettingsButton();
-        Project settingsProject = ProjectFactory.fillInAllFieldsOfProject();
+        Project settingsProject = ProjectFactory.fillInRequiredFieldsOfProject();
         projectSettingsPage.changeDataInProjectFields(settingsProject)
                 .clickUpdateSettingsButton();
+        projectsPage.deleteLatestProjectAfterTest();
 
         assertEquals(projectSettingsPage.getTextAlertMessageOnSettingsPage(), "Project settings were successfully updated!",
                 "The message is missing or does not match");
-        projectsPage.deleteLatestProjectAfterTest();
     }
 
     @Description("Add a filter in the project")
@@ -68,10 +73,9 @@ public class ProjectsTest extends BaseTest {
         loginPage.userRegistersWithValidData()
                 .clickProjectButton()
                 .clickCreateNewProjectButton();
-        Project project = ProjectFactory.fillInOnlyProjectNameField();
-        projectModalPage.fillInOnlyProjectNameField(project)
-                .isPageOpen();
-        repositoryPage.clickAddFilterButton()
+        Project project = ProjectFactory.fillInRequiredFieldsOfProject();
+        projectModalPage.fillInRequiredFieldsOfProject(project)
+        .clickAddFilterButton()
                 .selectFilterFromList()
                 .selectOptionFromCheckbox();
 
@@ -84,8 +88,8 @@ public class ProjectsTest extends BaseTest {
     public void userDeleteProject() {
         loginPage.userRegistersWithValidData()
                 .clickCreateNewProjectButton();
-        Project project = ProjectFactory.fillInAllFieldsOfProject();
-        projectModalPage.createProject(project);
+        Project project = ProjectFactory.fillInRequiredFieldsOfProject();
+        projectModalPage.fillInRequiredFieldsOfProject(project);
         projectsPage.clickProjectButton();
         int list1 = projectsPage.getSizeListOfProjects();
         projectsPage.deleteLatestProject()

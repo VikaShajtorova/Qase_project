@@ -17,7 +17,6 @@ public abstract class BasePage {
     public static final String BASE_URL = System.getenv().getOrDefault("QASE_URL", PropertyReader.getProperty("qase.url"));
     public static final By CREATE_BUTTON = By.xpath("//button[@type='submit']");
     public static final By CANCEL_BUTTON = By.xpath("//button//span[text()='Cancel']");
-    public static final By ERROR_MESSAGE = By.xpath("//div[@class='nlvny_']//span[@class='VF_8Uu']");
     public static final By ALERT_MESSAGE = By.xpath("//div[@role='alert']//span[@class='ic9QAx']");
     public static final By CLONE_BUTTON = By.xpath("//button[@type='submit']//span[@class='ZwgkIF' or text()='Clone']");
 
