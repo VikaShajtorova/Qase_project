@@ -19,7 +19,7 @@ public class ProjectsTest extends BaseTest {
         boolean getProjectCode = repositoryPage.getProjectCode();
         projectsPage.deleteLatestProjectAfterTest();
 
-        assertTrue(getProjectCode,"The project is missing from the page");
+        assertTrue(getProjectCode, "The project is missing from the page");
     }
 
     @Description("The user creates a project by filling only required fields")
@@ -32,9 +32,10 @@ public class ProjectsTest extends BaseTest {
         boolean getProjectCode = repositoryPage.getProjectCode();
         projectsPage.deleteLatestProjectAfterTest();
 
-        assertTrue(getProjectCode,"The project is missing from the page");
+        assertTrue(getProjectCode, "The project is missing from the page");
 
     }
+
     @Description("The user creates a project by filling only the project name field")
     @Test
     public void userCreatesProjectByFillingInOnlyProjectNameField() {
@@ -45,8 +46,9 @@ public class ProjectsTest extends BaseTest {
         boolean getProjectCode = repositoryPage.getProjectCode();
         projectsPage.deleteLatestProjectAfterTest();
 
-        assertTrue(getProjectCode,"The project is missing from the page");
+        assertTrue(getProjectCode, "The project is missing from the page");
     }
+
     @Description("The user change the project settings")
     @Test
     public void userChangeProjectSettings() {
@@ -58,12 +60,13 @@ public class ProjectsTest extends BaseTest {
         projectsPage.clickProjectButton()
                 .clickDropdownProject()
                 .clickSettingsButton();
-        Project settingsProject = ProjectFactory.fillInRequiredFieldsOfProject();
+        Project settingsProject = ProjectFactory.fillInAllFieldsOfProject();
         projectSettingsPage.changeDataInProjectFields(settingsProject)
                 .clickUpdateSettingsButton();
+        String message = projectSettingsPage.getTextAlertMessageOnSettingsPage();
         projectsPage.deleteLatestProjectAfterTest();
 
-        assertEquals(projectSettingsPage.getTextAlertMessageOnSettingsPage(), "Project settings were successfully updated!",
+        assertEquals(message, "Project settings were successfully updated!",
                 "The message is missing or does not match");
     }
 
@@ -74,15 +77,20 @@ public class ProjectsTest extends BaseTest {
                 .clickProjectButton()
                 .clickCreateNewProjectButton();
         Project project = ProjectFactory.fillInRequiredFieldsOfProject();
-        projectModalPage.fillInRequiredFieldsOfProject(project)
-        .clickAddFilterButton()
+        projectModalPage.fillInRequiredFieldsOfProject(project);
+        projectsPage.clickProjectButton()
+                .getLatestProjectInListAndClick()
+                .clickAddFilterButton()
                 .selectFilterFromList()
                 .selectOptionFromCheckbox();
-
-        assertEquals(repositoryPage.getTextNameFilter(), "Priority: Not set",
-                "The name of the filter does not match or is missing");
+        String nameFilter = repositoryPage.getTextNameFilter();
         projectsPage.deleteLatestProjectAfterTest();
+
+        assertEquals(nameFilter, "Priority: Not set",
+                "The name of the filter does not match or is missing");
     }
+
+
     @Description("The user delete the project")
     @Test
     public void userDeleteProject() {

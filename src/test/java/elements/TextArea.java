@@ -9,7 +9,7 @@ import org.openqa.selenium.WebDriver;
 public class TextArea {
     WebDriver driver;
     String label;
-    String textAreaLocator = "//label[text()='Description']/ancestor::div//textarea";
+    String textAreaLocator = "//label[text()='%s']/ancestor::div//textarea";
 
     public TextArea(WebDriver driver, String label) {
         this.driver = driver;
