@@ -9,7 +9,7 @@ import static org.testng.Assert.*;
 import org.testng.annotations.Test;
 import tests.base.BaseTest;
 
-public class SharedStepTest extends BaseTest {
+public class SharedStepTests extends BaseTest {
     @Description("Create Shared steps")
     @Test
     public void userCreateSharedSteps() {

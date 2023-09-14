@@ -8,7 +8,7 @@ import tests.base.BaseTest;
 
 import static org.testng.Assert.*;
 
-public class ProjectsTest extends BaseTest {
+public class ProjectsTests extends BaseTest {
     @Description("The user creates a project by filling in all the fields")
     @Test
     public void userCreatesProject() {

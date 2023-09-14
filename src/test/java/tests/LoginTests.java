@@ -7,7 +7,7 @@ import tests.base.BaseTest;
 
 import static org.testng.Assert.*;
 
-public class LoginTest extends BaseTest {
+public class LoginTests extends BaseTest {
     @Description("Input valid data")
     @Test
     public void userIsLoggedInWithValidData() {

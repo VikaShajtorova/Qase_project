@@ -2,6 +2,7 @@ package pages;
 
 import io.qameta.allure.Step;
 import lombok.extern.log4j.Log4j2;
+import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -178,6 +179,13 @@ public class RepositoryPage extends BasePage {
         boolean isDisplayed = driver.findElement(CASE_LIST).isDisplayed();
         log.info("Checks that list cases is displayed");
         return isDisplayed;
+    }
+    @Step("Get Alert")
+    public void getAlertOnRepositoryPage() {
+        wait.until(ExpectedConditions.alertIsPresent());
+        Alert alert = driver.switchTo().alert();
+        alert.accept();
+        log.info("Get Alert and accept");
     }
 
 

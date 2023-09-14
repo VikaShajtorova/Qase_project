@@ -7,10 +7,11 @@ import tests.base.BaseTest;
 
 import static org.testng.Assert.assertEquals;
 
-public class TestPlanTest extends BaseTest {
+public class
+TestPlanTests extends BaseTest {
     @Description("User create a test plan")
     @Test
-    public void userCreateTestPlan(){
+    public void userCreateTestPlan() {
         loginPage.userRegistersWithValidData()
                 .clickProjectButton()
                 .clickCreateNewProjectButton();
@@ -18,20 +19,21 @@ public class TestPlanTest extends BaseTest {
         projectModalPage.createProject(project)
                 .clickSuiteButton();
         Suite createSuite = SuiteFactory.fillInOnlyRequiredSuitesField();
-        suiteModalPage.createSuiteByFillingInRequiredFields(createSuite)
-                .clickCreateButton();
+        suiteModalPage.createSuiteByFillingInRequiredFields(createSuite);
         repositoryPage.selectSuiteFromList()
-        .clickCaseButton();
+                .clickCaseButton();
         Case caseBasic = CaseFactory.fillInTitleFieldInCase();
         basicCasePage.fillInTitleFieldInCase(caseBasic)
                 .clickSaveButton();
         testPlansPage.clickTestPlanButton()
-                .clickCreatePlanButton();
+                .getAlertOnTestPlanPage();
+               testPlansPage .clickCreatePlanButton();
         TestPlan testPlan = TestPlanFactory.fillInPlanDetails();
         createTestPlanPage.fillInTitleAndDescriptionField(testPlan)
                 .clickAddCasesButton()
                 .selectSuiteFromList()
-                .clickDoneButton();
+                .clickDoneButton()
+                        .clickCreatePlanButton();
 
         assertEquals(testPlansPage.getTextAlertMessageOnTestPlansPage(), "Test plan was created successfully!",
                 "The message is missing or does not match");

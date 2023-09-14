@@ -10,7 +10,7 @@ import pages.BasePage;
 
 @Log4j2
 public class TestPlansPage extends BasePage {
-    public static final By TEST_PLAN_BUTTON = By.xpath("//span[text()='Test Plans']");
+    public static final By TEST_PLAN_BUTTON = By.xpath("//a[@aria-label='Test Plans']");
     public static final By CREATE_PLAN_BUTTON = By.id("createButton");
 
     public TestPlansPage(WebDriver driver) {
@@ -19,7 +19,7 @@ public class TestPlansPage extends BasePage {
 
     @Step("Click the Create plan button")
     public CreateTestPlanPage clickCreatePlanButton() {
-        driver.findElement(CREATE_PLAN_BUTTON).click();
+        wait.until(ExpectedConditions.elementToBeClickable(CREATE_PLAN_BUTTON)).click();
         log.info("Find the item: " + CREATE_PLAN_BUTTON + " and click");
         return new CreateTestPlanPage(driver);
     }

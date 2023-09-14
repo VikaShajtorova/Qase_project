@@ -18,18 +18,20 @@ public class SuiteModalPage extends BasePage {
     }
 
     @Step("Create a suite by filling in all the fields")
-    public SuiteModalPage createSuite(Suite suite) {
+    public RepositoryPage createSuite(Suite suite) {
         new Input(driver, "Suite name").write(suite.getSuiteName());
-        new DropDown(driver, "Parent suite").selectOption("Project root");
+        new DropDown(driver, "Parent suite").selectOptionSuite("Project root");
         new TextEditor(driver, "Description").write(suite.getDescription());
         new TextEditor(driver, "Preconditions").write(suite.getPreconditions());
-        return this;
+        clickCreateButton();
+        return new RepositoryPage(driver);
     }
 
     @Step("Create a suite by filling in the required fields")
-    public SuiteModalPage createSuiteByFillingInRequiredFields(Suite suite) {
+    public RepositoryPage createSuiteByFillingInRequiredFields(Suite suite) {
         new Input(driver, "Suite name").write(suite.getSuiteName());
-        return this;
+        clickCreateButton();
+        return new RepositoryPage(driver);
     }
 
     @Step("Click the Create button")

@@ -3,22 +3,23 @@
 <suite thread-count="3" name="Test suite" parallel="tests">
     <test name="Stream 1">
         <classes>
-            <class name="tests.LoginTest"/>
-            <class name="tests.ProjectsTest"/>
+            <class name="tests.LoginTests"/>
+            <class name="tests.ProjectsTests"/>
+            <class name="tests.AttachmentsTests"/>
         </classes>
     </test> <!-- Test -->
 
     <test name="Stream 2">
         <classes>
-            <class name="tests.RepositoryTest"/>
+            <class name="tests.RepositoryTests"/>
         </classes>
     </test> <!-- Test -->
 
     <test name="Stream 3">
         <classes>
-            <class name="tests.TestRunsTest"/>
-            <class name="tests.TestPlanTest"/>
-            <class name="tests.SharedStepTest"/>
+            <class name="tests.TestRunsTests"/>
+            <class name="tests.TestPlanTests"/>
+            <class name="tests.SharedStepTests"/>
         </classes>
     </test> <!-- Test -->
 </suite>

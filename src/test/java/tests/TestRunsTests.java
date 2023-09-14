@@ -2,14 +2,16 @@ package tests;
 
 import io.qameta.allure.Description;
 import models.*;
+
 import static org.testng.Assert.*;
+
 import org.testng.annotations.Test;
 import tests.base.BaseTest;
 
-public class TestRunsTest extends BaseTest {
+public class TestRunsTests extends BaseTest {
     @Description("User create the Test run")
     @Test
-    public void createTestRun(){
+    public void createTestRun() {
         loginPage.userRegistersWithValidData()
                 .clickProjectButton()
                 .clickCreateNewProjectButton();
@@ -18,14 +20,13 @@ public class TestRunsTest extends BaseTest {
                 .clickSuiteButton();
         Suite createSuite = SuiteFactory.fillInOnlyRequiredSuitesField();
         suiteModalPage.createSuiteByFillingInRequiredFields(createSuite)
-                .clickCreateButton()
                 .clickToLastSuiteInList()
                 .clickCreateCaseButtonInDropDown();
         Case caseBasic = CaseFactory.fillInTitleFieldInCase();
         basicCasePage.fillInTitleFieldInCase(caseBasic)
                 .clickSaveButton();
         testRunsPage.clickTestRunButton()
-                        .getAlert();
+                .getAlert();
         testRunsPage.clickStartNewTestRunsButton();
         Run run = RunFactory.fillInFieldsOfRun();
         testRunsModalPage.fillInFieldsModalRun(run)
@@ -34,7 +35,7 @@ public class TestRunsTest extends BaseTest {
                 .clickDoneButton()
                 .clickStarRunButton();
 
-        assertTrue(listOfSuitesInRunPage.titleOfTestRunIsDisplayed(),"The name of the test run is missing");
+        assertTrue(listOfSuitesInRunPage.titleOfTestRunIsDisplayed(), "The name of the test run is missing");
         projectsPage.deleteLatestProjectAfterTest();
 
 
@@ -42,7 +43,7 @@ public class TestRunsTest extends BaseTest {
 
     @Description("User delete the Test run")
     @Test
-    public void deleteTestRun(){
+    public void deleteTestRun() {
         loginPage.userRegistersWithValidData()
                 .clickProjectButton()
                 .clickCreateNewProjectButton();
@@ -51,7 +52,6 @@ public class TestRunsTest extends BaseTest {
                 .clickSuiteButton();
         Suite createSuite = SuiteFactory.fillInOnlyRequiredSuitesField();
         suiteModalPage.createSuiteByFillingInRequiredFields(createSuite)
-                .clickCreateButton()
                 .clickToLastSuiteInList()
                 .clickCreateCaseButtonInDropDown();
         Case caseBasic = CaseFactory.fillInTitleFieldInCase();
@@ -69,9 +69,10 @@ public class TestRunsTest extends BaseTest {
                 .clickGoBackButton()
                 .clickDropDownButtonTestRun()
                 .selectOptionInDropDownButtonTestRun()
-                .ClickDeleteButtonInModalWindow();
+                .ClickDeleteButtonInModalWindow()
+                .clickTestRunButton();
 
-        assertFalse(testRunsPage.tableTestRunIstDisplayed(),"The table test run is displayed on TestRunPage");
+        assertFalse(testRunsPage.tableTestRunIstDisplayed(), "The table test run is displayed on TestRunPage");
         projectsPage.deleteLatestProjectAfterTest();
     }
 

@@ -12,7 +12,7 @@ import pages.BasePage;
 public class TestRunsPage extends BasePage {
     protected static final By TEST_RUNS_BUTTON = By.xpath("//a[@aria-label='Test Runs']//span[@class='UYBenG']");
     protected static final By START_NEW_TEST_RUN_BUTTON = By.xpath("(//button//span[@class='ZwgkIF' or text()='Start new test run'])[1]");
-    public static final By TABLE_TEST_RUN = By.xpath("//table[@class='cgfcf7']");
+    public static final By TABLE_TEST_RUN = By.xpath("//table[@class='cgfcf7']//tbody");
     public static final By DROPDOWN_BUTTON_TEST_RUN = By.xpath("//tbody[@class='t57YVN']//td//button");
     public static final By DELETE_BUTTON_IN_DROPDOWN_TEST_RUN = By.xpath("//ul[@role='menu']//button[text()='Delete']");
     public static final By DELETE_BUTTON_IN_MODAL_WINDOW = By.xpath("//button[@type='button']//span[text()='Delete']");

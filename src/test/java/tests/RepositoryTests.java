@@ -7,7 +7,7 @@ import models.*;
 import org.testng.annotations.Test;
 import tests.base.BaseTest;
 
-public class RepositoryTest extends BaseTest {
+public class RepositoryTests extends BaseTest {
     @Description("The user creates a suite by filling in all the fields")
     @Test
     public void userCreatesSuite() {
@@ -18,12 +18,12 @@ public class RepositoryTest extends BaseTest {
         projectModalPage.fillInRequiredFieldsOfProject(project)
                 .clickSuiteButton();
         Suite createSuite = SuiteFactory.fillInAllFieldsOfSuite();
-        suiteModalPage.createSuite(createSuite)
-                .clickCreateButton();
+        suiteModalPage.createSuite(createSuite);
+        projectsPage.deleteLatestProjectAfterTest();
 
         assertEquals(repositoryPage.getTextAlertMessageOnRepositoryPage(), "Suite was successfully created.",
                 "The message is missing or does not match");
-        projectsPage.deleteLatestProjectAfterTest();
+
     }
 
     @Description("The user delete a suite")
@@ -37,14 +37,16 @@ public class RepositoryTest extends BaseTest {
                 .clickSuiteButton();
         Suite createSuite = SuiteFactory.fillInAllFieldsOfSuite();
         suiteModalPage.createSuiteByFillingInRequiredFields(createSuite)
-                .clickCreateButton();
-        repositoryPage.clickToLastSuiteInList()
+                .invisibilityOfElementLocated()
+                .clickToLastSuiteInList()
                 .clickDeleteButtonInDropDown()
                 .clickDeleteButton();
+        String message = repositoryPage.getTextAlertMessageOnRepositoryPage();
+        projectsPage.clickProjectButton()
+                        .deleteLatestProject();
 
-        assertEquals(repositoryPage.getTextAlertMessageOnRepositoryPage(), "Suite was successfully deleted.",
+        assertEquals(message, "Suite was successfully deleted.",
                 "The message is missing or does not match");
-        projectsPage.deleteLatestProjectAfterTest();
     }
 
     @Description("The user edits the suite")
@@ -58,7 +60,6 @@ public class RepositoryTest extends BaseTest {
                 .clickSuiteButton();
         Suite createSuite = SuiteFactory.fillInAllFieldsOfSuite();
         suiteModalPage.createSuiteByFillingInRequiredFields(createSuite)
-                .clickCreateButton()
                 .invisibilityOfElementLocated()
                 .clickToLastSuiteInList()
                 .clickEditButtonInDropDown();
@@ -82,7 +83,6 @@ public class RepositoryTest extends BaseTest {
                 .clickSuiteButton();
         Suite createSuite = SuiteFactory.fillInAllFieldsOfSuite();
         suiteModalPage.createSuiteByFillingInRequiredFields(createSuite)
-                .clickCreateButton()
                 .invisibilityOfElementLocated()
                 .clickToLastSuiteInList()
                 .clickCloneButtonInDropDown()
@@ -104,12 +104,10 @@ public class RepositoryTest extends BaseTest {
                 .clickSuiteButton();
         Suite createSuite = SuiteFactory.fillInAllFieldsOfSuite();
         suiteModalPage.createSuiteByFillingInRequiredFields(createSuite)
-                .clickCreateButton()
                 .clickToLastSuiteInList()
                 .clickCreateSuiteButtonInDropDown();
         Suite createSubSuite = SuiteFactory.fillInAllFieldsOfSuite();
-        suiteModalPage.createSuiteByFillingInRequiredFields(createSubSuite)
-                .clickCreateButton();
+        suiteModalPage.createSuiteByFillingInRequiredFields(createSubSuite);
 
         assertEquals(repositoryPage.getTextAlertMessageOnRepositoryPage(), "Suite was successfully created.",
                 "The message is missing or does not match");
@@ -205,24 +203,6 @@ public class RepositoryTest extends BaseTest {
                 "The message is missing or does not match");
         projectsPage.deleteLatestProjectAfterTest();
     }
-    @Description("Check the file download")
-    @Test
-    public void checkFileDownload() {
-        loginPage.userRegistersWithValidData()
-                .clickProjectButton()
-                .clickCreateNewProjectButton();
-        Project project = ProjectFactory.fillInRequiredFieldsOfProject();
-        projectModalPage.fillInRequiredFieldsOfProject(project)
-                .clickCaseButton();
-        Case caseBasic = CaseFactory.fillInAllFieldsOfBasicCase();
-        basicCasePage.fillInBasicFields(caseBasic);
-        attachmentsCasePage.clickAddAttachmentButton();
-        attachmentsCasePage.downloadFile();
-        String fileName = attachmentsCasePage.getFileName();
-        casePage.clickSaveButton();
 
-        assertEquals(fileName, "Screenshot_8.png", "The file name does not match");
-        projectsPage.deleteLatestProjectAfterTest();
-    }
 
 }
