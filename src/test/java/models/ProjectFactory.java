@@ -10,7 +10,7 @@ public class ProjectFactory {
     public static Project fillInAllFieldsOfProject() {
         return Project.builder()
                 .projectName(faker.lorem().word())
-                .projectCode(faker.lorem().word())
+                .projectCode(faker.lorem().fixedString(8))
                 .description(faker.lorem().fixedString(50))
                 .build();
     }

@@ -43,7 +43,7 @@ public class RepositoryTests extends BaseTest {
                 .clickDeleteButton();
         String message = repositoryPage.getTextAlertMessageOnRepositoryPage();
         projectsPage.clickProjectButton()
-                        .deleteLatestProject();
+                .deleteLatestProject();
 
         assertEquals(message, "Suite was successfully deleted.",
                 "The message is missing or does not match");
@@ -65,11 +65,11 @@ public class RepositoryTests extends BaseTest {
                 .clickEditButtonInDropDown();
         Suite editSuite = SuiteFactory.fillInAllFieldsOfSuite();
         editSuitePage.editsSuite(editSuite);
-
-        assertEquals(repositoryPage.getTextAlertMessageOnRepositoryPage(), "Suite was successfully edited.",
-                "The message is missing or does not match");
+        String messageEditSuite = repositoryPage.getTextAlertMessageOnRepositoryPage();
         projectsPage.deleteLatestProjectAfterTest();
 
+        assertEquals(messageEditSuite, "Suite was successfully edited.",
+                "The message is missing or does not match");
     }
 
     @Description("The user clone the suite")
@@ -87,10 +87,11 @@ public class RepositoryTests extends BaseTest {
                 .clickToLastSuiteInList()
                 .clickCloneButtonInDropDown()
                 .clickCloneButtonOnSuiteModalPage();
-
-        assertEquals(repositoryPage.getTextAlertMessageOnRepositoryPage(), "Suite was successfully cloned ",
-                "The message is missing or does not match");
+        String messageCloneSuite = repositoryPage.getTextAlertMessageOnRepositoryPage();
         projectsPage.deleteLatestProjectAfterTest();
+
+        assertEquals(messageCloneSuite, "Suite was successfully cloned",
+                "The message is missing or does not match");
     }
 
     @Description("The user creates a sub suite")
@@ -108,10 +109,11 @@ public class RepositoryTests extends BaseTest {
                 .clickCreateSuiteButtonInDropDown();
         Suite createSubSuite = SuiteFactory.fillInAllFieldsOfSuite();
         suiteModalPage.createSuiteByFillingInRequiredFields(createSubSuite);
-
-        assertEquals(repositoryPage.getTextAlertMessageOnRepositoryPage(), "Suite was successfully created.",
-                "The message is missing or does not match");
+        String messageCreatesSubSuite = repositoryPage.getTextAlertMessageOnRepositoryPage();
         projectsPage.deleteLatestProjectAfterTest();
+
+        assertEquals(messageCreatesSubSuite, "Suite was successfully created.",
+                "The message is missing or does not match");
     }
 
     @Description("The user creates a case by filling in all the fields")
@@ -134,10 +136,12 @@ public class RepositoryTests extends BaseTest {
         Case caseStep = CaseFactory.fillInAllFieldsOfAddStep();
         parametersCasePage.fillInTestCaseStepsFields(caseStep)
                 .clickSaveButton();
+        String messageCreateCase = repositoryPage.getTextAlertMessageOnRepositoryPage();
+        projectsPage.clickProjectButton()
+                .deleteLatestProject();
 
-        assertEquals(repositoryPage.getTextAlertMessageOnRepositoryPage(), "Test case was created successfully!",
+        assertEquals(messageCreateCase, "Test case was created successfully!",
                 "The message is missing or does not match");
-        projectsPage.deleteLatestProjectAfterTest();
     }
 
     @Description("The user delete a case")
@@ -175,10 +179,11 @@ public class RepositoryTests extends BaseTest {
                 .selectCaseFromList()
                 .clickCloneButtonOnCaseModalPage()
                 .clickCloneButtonOnCloneCaseModalPage();
-
-        assertEquals(repositoryPage.getTextAlertMessageOnRepositoryPage(), "Case was successfully cloned",
-                "The message is missing or does not match");
+        String messageCloneCase = repositoryPage.getTextAlertMessageOnRepositoryPage();
         projectsPage.deleteLatestProjectAfterTest();
+
+        assertEquals(messageCloneCase, "Case was successfully cloned",
+                "The message is missing or does not match");
     }
 
     @Description("The user Edit a case")
@@ -193,16 +198,17 @@ public class RepositoryTests extends BaseTest {
         Case caseBasic = CaseFactory.fillInAllFieldsOfBasicCase();
         basicCasePage.fillInTitleFieldInCase(caseBasic)
                 .clickSaveButton()
+                .invisibilityOfElementLocated()
                 .selectCaseFromList()
                 .clickEditButtonOnCaseModalPage();
         Case caseBasicEdit = CaseFactory.fillInAllFieldsOfBasicCase();
         basicCasePage.fillInTitleFieldInCase(caseBasicEdit)
                 .clickSaveButton();
-
-        assertEquals(repositoryPage.getTextAlertMessageOnRepositoryPage(), "Test case was edited successfully!",
-                "The message is missing or does not match");
+        String messageEditCase = repositoryPage.getTextAlertMessageOnRepositoryPage();
         projectsPage.deleteLatestProjectAfterTest();
-    }
 
+        assertEquals(messageEditCase, "Test case was edited successfully!",
+                "The message is missing or does not match");
+    }
 
 }

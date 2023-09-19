@@ -2,10 +2,7 @@ package pages;
 
 import io.qameta.allure.Step;
 import lombok.extern.log4j.Log4j2;
-import org.openqa.selenium.Alert;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import java.util.List;
@@ -13,7 +10,7 @@ import java.util.List;
 @Log4j2
 public class ProjectsPage extends BasePage {
     public static final By PROJECTS_TITLE = By.xpath("//div[@class='col-lg-12']//h1[text()='Projects']");
-    public static final By PROJECTS_BUTTON = By.xpath("//a[text()='Projects']");
+    public static final By PROJECTS_BUTTON = By.xpath("//div[@class='lsfuW_']//a[@class='prLoyX' and text()='Projects']");
     public static final By CREATE_NEW_PROJECT_BUTTON = By.id("createButton");
     public static final By LATEST_PROJECT = By.xpath("//tr[@class='project-row'][last()]//a[@class='project-name']");
     public static final By DROPDOWN_DELETE_LATEST_PROJECT = By.xpath("(//tr[@class='project-row']//div//a//i)[last()]");

@@ -181,11 +181,12 @@ public class RepositoryPage extends BasePage {
         return isDisplayed;
     }
     @Step("Get Alert")
-    public void getAlertOnRepositoryPage() {
+    public ProjectsPage getAlertOnRepositoryPage() {
         wait.until(ExpectedConditions.alertIsPresent());
         Alert alert = driver.switchTo().alert();
         alert.accept();
         log.info("Get Alert and accept");
+        return new ProjectsPage(driver);
     }
 
 

@@ -25,9 +25,8 @@ public class TestRunsTests extends BaseTest {
         Case caseBasic = CaseFactory.fillInTitleFieldInCase();
         basicCasePage.fillInTitleFieldInCase(caseBasic)
                 .clickSaveButton();
-        testRunsPage.clickTestRunButton()
-                .getAlert();
-        testRunsPage.clickStartNewTestRunsButton();
+        testRunsPage.clickTestRunButton();
+                        testRunsPage.clickStartNewTestRunsButton();
         Run run = RunFactory.fillInFieldsOfRun();
         testRunsModalPage.fillInFieldsModalRun(run)
                 .clickSelectCasesButton()
@@ -57,8 +56,8 @@ public class TestRunsTests extends BaseTest {
         Case caseBasic = CaseFactory.fillInTitleFieldInCase();
         basicCasePage.fillInTitleFieldInCase(caseBasic)
                 .clickSaveButton();
-        testRunsPage.clickTestRunButton()
-                .getAlert();
+        testRunsPage.clickTestRunButton();
+
         testRunsPage.clickStartNewTestRunsButton();
         Run run = RunFactory.fillInFieldsOfRun();
         testRunsModalPage.fillInFieldsModalRun(run)

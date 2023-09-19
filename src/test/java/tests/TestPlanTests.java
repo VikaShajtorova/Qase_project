@@ -25,8 +25,8 @@ TestPlanTests extends BaseTest {
         Case caseBasic = CaseFactory.fillInTitleFieldInCase();
         basicCasePage.fillInTitleFieldInCase(caseBasic)
                 .clickSaveButton();
-        testPlansPage.clickTestPlanButton()
-                .getAlertOnTestPlanPage();
+        testPlansPage.clickTestPlanButton();
+
                testPlansPage .clickCreatePlanButton();
         TestPlan testPlan = TestPlanFactory.fillInPlanDetails();
         createTestPlanPage.fillInTitleAndDescriptionField(testPlan)
